@@ -1,0 +1,36 @@
+@use "../../abstracts/mixins";
+
+.agenda{
+    width: 50rem;
+    aspect-ratio: 1/1;
+    background: #eee;
+    border-radius: 2rem;
+
+    &__header{
+        background:#E74646;
+        height: 20%;
+        border-top-right-radius: 2rem;
+        border-top-left-radius: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    &__month{
+        height: 80%;
+        padding: 2rem;
+        list-style: none;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 1rem;
+    }
+
+    &__day{
+        background: darken(#eee, 10%);
+        @include mixins.flexCenter;
+        width: 100%;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+    }
+}
+
