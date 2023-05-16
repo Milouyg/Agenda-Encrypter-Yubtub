@@ -57,30 +57,65 @@ class Header{
     nameOfMonth;
     htmlElement;
     agenda;
-    htmlElement__p;
-    htmlElement__iconLeft;
-    htmlElement__iconRight;
+    leftButton;
+    rightButton;
 
     constructor(agenda, nameOfMonth) {
         this.agenda = agenda;
+        this.nameOfMonth = nameOfMonth;
         this.htmlElement = document.createElement("header");
         this.htmlElement.classList.add("agenda__header");
-        this.htmlElement__iconLeft = document.createElement("p");
-        this.htmlElement__iconLeft.classList = "agenda__icon"
-        this.htmlElement__p = document.createElement("p");
-        this.htmlElement__p.classList = "agenda__p"
-        this.htmlElement__iconRight = document.createElement("p");
-        this.htmlElement__iconRight.classList = "agenda__icon"
+        this.text = document.createElement("h2");
+
         this.agenda.render(".agenda", this.htmlElement);
+        this.leftButton = new Button("<", "agenda--left", this);
+        this.agenda.render(".agenda__header", this.text);
+        this.rightButton = new Button(">", "agenda--right", this);
+        this.text.innerText = this.nameOfMonth;
+    }
+    
+    render(placeToRender, whatToRender) {
+        this.agenda.render(placeToRender, whatToRender);
+    }
+}
 
-        this.agenda.render(".agenda__header", this.htmlElement__iconLeft);
-        this.agenda.render(".agenda__header", this.htmlElement__p);
-        this.agenda.render(".agenda__header", this.htmlElement__iconRight);
-        this.htmlElement__iconLeft.innerText = "<";
-        this.htmlElement__p.innerText = "Agenda";
-        this.htmlElement__iconRight.innerText = ">";
+class Button{
+    header
+    htmlElement;
+    innerText;
+    extraClass;
+    switcher;
 
-        this.nameOfMonth = nameOfMonth;
+    constructor(innerText, extraClass, header) {
+
+        this.htmlElement = document.createElement("button");
+        this.htmlElement.classList.add("agenda__button");
+        this.extraClass = extraClass;
+        this.htmlElement.classList.add(this.extraClass);
+        this.innerText = innerText;
+        this.htmlElement.innerText = this.innerText;
+        this.switcher = new Switcher(this.extraClass);
+        this.header = header;
+        this.render();
+
+        this.htmlElement.onclick = this.buttonClicked;
+    }
+
+    buttonClicked = () => {
+        console.log(this.extraClass, "klik")
+    }
+
+    render() {
+        this.header.render("header", this.htmlElement);
+    }
+}
+
+class Switcher{
+    text;
+
+    constructor(text) {
+        this.text = text;
+
     }
 
 }
