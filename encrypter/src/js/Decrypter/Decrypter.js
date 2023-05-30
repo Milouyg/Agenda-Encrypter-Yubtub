@@ -1,9 +1,9 @@
 class Decrypter {
     decrypt(stringToDecrypt) {
-        stringToDecrypt = stringToDecrypt.toUpperCase();
-        let decryptedString = [];
-        for (let i = 0; i < stringToDecrypt.length; i++) {
-            switch (stringToDecrypt[i]) {
+        stringToDecrypt = stringToDecrypt.toUpperCase(); // Zet alle letters in hoofdletters
+        let decryptedString = []; // Maakt een lege array
+        for (let i = 0; i < stringToDecrypt.length; i++) { // Loopt door de string heen
+            switch (stringToDecrypt[i]) { // Waar je nu bent, verander de letter en push dit in die array
                 case "D":
                     decryptedString.push("A");
                     break;
@@ -83,10 +83,10 @@ class Decrypter {
                     decryptedString.push("Z");
                     break;
                 default:
-                    decryptedString.push(stringToDecrypt[i]);
+                    decryptedString.push(stringToDecrypt[i]); // Default is de standaard letter die je hebt meegegeven in de Decrypter
             }
         }
-        decryptedString = decryptedString.join("");
+        decryptedString = decryptedString.join(""); // Geeft een array als een string terug
         return decryptedString;
     }
 }

@@ -1,5 +1,5 @@
 class Renderer{
     render(whatToRender, whereToRender){
-        whereToRender.appendChild(whatToRender);
+        whereToRender.appendChild(whatToRender); // Waar moet je het renderen en wat moet je renderen
     }
 }

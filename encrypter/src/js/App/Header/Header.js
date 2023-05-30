@@ -8,11 +8,12 @@ class Header{
         this.htmlElement = document.createElement("header");
         this.htmlElement.classList.add("view__header");
         this.headingHtmlElement = document.createElement("h1");
-        this.headingHtmlElement.innerText = headingText;
+        this.headingHtmlElement.innerText = headingText; // Krijgt de 
         this.headingHtmlElement.classList.add("view__heading");
 
         this.view = view;
-        this.view.main.app.renderer.render(this.htmlElement, this.view.htmlElement);
+        // Rendert de header en h1
+        this.view.main.app.renderer.render(this.htmlElement, this.view.htmlElement); 
         this.view.main.app.renderer.render(this.headingHtmlElement, this.htmlElement);
     }
 }

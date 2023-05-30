@@ -14,17 +14,17 @@ class DecrypterView{
         this.type = "DECRYPT";
 
         this.main.app.renderer.render(this.htmlElement, this.main.htmlElement);
-        this.header = new Header(this, "Decrypter");
-        this.body = new Body(this, placeholder);
+        this.header = new Header(this, "Decrypter"); // Geeft aan de class Header zichzelf en "Decrypter" mee
+        this.body = new Body(this, placeholder); // Geeft aan de class Body zichzelf en placeholder mee
         this.footer = new Footer(this, "Decrypt");
     }
 
     getDataFromBody(){
-        this.main.cipher(this.body.text, this.type);
+        this.main.cipher(this.body.text, this.type); // Geeft aan de ciper functie die in de main zit de text en het type mee
     }
 
     changeBody(decryptedText) {
-        this.body.changeBody(decryptedText);
+        this.body.changeBody(decryptedText); // Geeft aan de changeBody functie in de body de decryptedText mee
     }
 }
 
