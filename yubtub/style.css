@@ -1,0 +1,124 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: sans-serif;
+}
+
+body {
+  font-size: 2rem;
+  width: 100%;
+  height: 100%;
+}
+
+.header {
+  width: 100%;
+  height: 5rem;
+  background: #5c16c5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.yubtub {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 2rem;
+}
+.yubtub__main {
+  flex: 2.5 1 0;
+  flex-direction: column;
+  display: flex;
+  gap: 3rem;
+}
+.yubtub__section {
+  flex: 1 1 0;
+}
+.yubtub__figure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+.yubtub__video {
+  width: 100%;
+}
+.yubtub__star {
+  position: absolute;
+  top: 0.5%;
+  left: -2%;
+  font-size: 4.5rem;
+  color: hsl(60deg, 95%, 50%);
+}
+.yubtub__star:hover {
+  cursor: pointer;
+}
+.yubtub__group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rem 2rem;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 6.5rem;
+  bottom: 0%;
+}
+.yubtub__group--left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+}
+.yubtub__group--right {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+}
+.yubtub__icon {
+  font-size: 4.5rem;
+}
+.yubtub__comments {
+  flex: 1 1 0;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 2rem;
+}
+.yubtub__comment {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  width: 100%;
+  height: 8rem;
+  border: 0.4rem solid black;
+  padding: 0rem 2rem;
+}
+.yubtub__textarea {
+  resize: none;
+  font-size: 2rem;
+  padding: 1rem 1rem;
+  vertical-align: start;
+}
+.yubtub__aside {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background: red;
+}
+
+/*# sourceMappingURL=style.css.map */
