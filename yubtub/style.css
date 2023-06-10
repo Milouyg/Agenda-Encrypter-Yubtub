@@ -29,8 +29,10 @@ body {
 .yubtub {
   display: flex;
   justify-content: flex-start;
+  margin: 0 auto;
   gap: 2rem;
   padding: 2rem 2rem;
+  max-width: 144rem;
 }
 .yubtub__main {
   flex: 2.5 1 0;
@@ -50,16 +52,6 @@ body {
 }
 .yubtub__video {
   width: 100%;
-}
-.yubtub__star {
-  position: absolute;
-  top: 0.5%;
-  left: -2%;
-  font-size: 4.5rem;
-  color: hsl(60deg, 95%, 50%);
-}
-.yubtub__star:hover {
-  cursor: pointer;
 }
 .yubtub__group {
   display: flex;
@@ -87,6 +79,25 @@ body {
 }
 .yubtub__icon {
   font-size: 4.5rem;
+}
+.yubtub__icon--starTop {
+  position: absolute;
+  top: 0.5%;
+  left: -2%;
+  font-size: 4.5rem;
+  color: hsl(60deg, 95%, 50%);
+}
+.yubtub__icon--starTop:hover {
+  cursor: pointer;
+}
+.yubtub__icon--starBottom {
+  color: hsl(60deg, 95%, 50%);
+}
+.yubtub__icon--starBottom:hover {
+  cursor: pointer;
+}
+.yubtub__icon--arrow:hover {
+  cursor: pointer;
 }
 .yubtub__comments {
   flex: 1 1 0;
@@ -119,7 +130,47 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background: red;
+}
+.yubtub__nextVideo {
+  width: 25.7rem;
+  height: 14.5rem;
+  background: black;
+}
+.yubtub__nextVideo:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 56.25rem) {
+  .yubtub {
+    flex-direction: column;
+  }
+  .yubtub__aside {
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 43.75rem) {
+  .yubtub__text {
+    font-size: 1.6rem;
+  }
+  .yubtub__textarea {
+    font-size: 1.6rem;
+  }
+}
+@media screen and (max-width: 25rem) {
+  .yubtub__group {
+    font-size: 1.6rem;
+    height: 5.5rem;
+    padding: 0rem 2rem;
+  }
+  .yubtub__icon {
+    font-size: 3.5rem;
+  }
+  .yubtub__comment {
+    height: 6rem;
+  }
+  .yubtub__textarea {
+    font-size: 1.6rem;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

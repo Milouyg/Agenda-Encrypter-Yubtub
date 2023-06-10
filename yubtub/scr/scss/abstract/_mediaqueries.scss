@@ -1,0 +1,49 @@
+@media screen and (max-width: 56.25rem ){ // 900px
+    
+    .yubtub{
+        flex-direction: column;
+
+        &__aside{
+            margin: 0 auto;
+        }
+    }
+}
+
+@media screen and (max-width: 43.75rem ){ // 700px
+    
+    .yubtub{
+
+        &__text{
+            font-size: 1.6rem;
+        }
+
+        &__textarea{
+            font-size: 1.6rem;
+        }
+    }
+}
+
+@media screen and (max-width: 25rem ){ // 400px
+    
+    .yubtub{
+
+        &__group{
+            font-size: 1.6rem;
+            height: 5.5rem;
+            padding: 0rem 2rem;
+        }
+
+        &__icon{
+            font-size: 3.5rem;
+        }
+
+        &__comment{
+            height: 6rem;
+        }
+
+        &__textarea{
+            font-size: 1.6rem;
+        }
+
+    }
+}
