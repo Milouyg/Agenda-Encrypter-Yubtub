@@ -11,7 +11,6 @@ class Api {
             .then((response) => {
                 return response.json();
             }).then((data) => {
-
                 this.data = data["data"];
             })
         return this.data;
@@ -28,7 +27,6 @@ class App {
             this.switcher = new Switcher(this, data);
         });
     }
-
 }
 
 class Switcher {
@@ -39,7 +37,7 @@ class Switcher {
     constructor(app, data) {
         this.app = app; // Class app
         this.data = data;
-        this.yubtub = new Yubtub(this.app, data[0]);
+        this.yubtub = new Yubtub(this.app, data);
         this.cleaner = new Cleaner();
     }
 
@@ -72,6 +70,7 @@ class Yubtub {
 
     constructor(app, data) {
         this.app = app;
+        
         this.renderer = new Renderer();
         this.header = new Header();
         this.renderer.render("body", this.header.htmlElement);
@@ -192,7 +191,7 @@ class Video {
         this.data = data;
         this.htmlElement = document.createElement("video");
         this.htmlElement.classList.add("yubtub__video");
-        this.htmlElement.src = "./scr/videos/" + data["video"];
+        this.htmlElement.src = "./scr/videos/" + data[0]["video"];
 
     }
 }
@@ -261,7 +260,6 @@ class Aside {
     constructor(yubtub, data) {
         this.yubtub = yubtub;
         this.data = data;
-        console.log(this.yubtub)
 
         this.htmlElement = document.createElement("aside");
         this.htmlElement.classList.add("yubtub__aside");
@@ -278,10 +276,13 @@ class NextVideo {
     constructor(aside, data) {
         this.aside = aside;
         this.data = data;
-        this.htmlElement = document.createElement("video");
-        this.htmlElement.classList.add("yubtub__nextVideo");
-        this.htmlElement.src = "./scr/videos/" + data.video;
-        this.aside.yubtub.renderer.render("aside", this.htmlElement);
+
+        for(let i = 0; i < 5; i++){
+            this.htmlElement = document.createElement("video");
+            this.htmlElement.classList.add("yubtub__nextVideo");
+            this.htmlElement.src = "./scr/videos/" + data[i].video;
+            this.aside.yubtub.renderer.render("aside", this.htmlElement);
+        }
         this.htmlElement.onclick = this.videoClicked;
     }
 
