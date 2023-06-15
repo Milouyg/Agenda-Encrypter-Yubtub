@@ -64,6 +64,7 @@ class Renderer {
 
 class Yubtub {
     header;
+    yubtub;
     main;
     aside;
     renderer;
@@ -75,6 +76,12 @@ class Yubtub {
         this.header = new Header();
         this.renderer.render("body", this.header.htmlElement);
         this.renderer.render("header", this.header.text);
+
+        this.htmlElementDivYubtub = document.createElement("div");
+        this.htmlElementDivYubtub.classList.add("yubtub");
+
+        this.renderer.render("body", this.htmlElementDivYubtub);
+
         this.main = new Main(this, data);
         this.aside = new Aside(this, data);
     }
@@ -97,7 +104,7 @@ class Header {
 }
 
 class Main {
-    yubtub;
+
     data;
     htmlElementDivYubtub;
     htmlElementMain;
@@ -105,7 +112,7 @@ class Main {
 
     htmlElement
     htmlElementFigure;
-
+    htmlElementStarTop;
 
     htmlElementDivGroup;
     htmlElementDivLeft;
@@ -115,14 +122,11 @@ class Main {
     htmlElementIconStarBottom;
     htmlElementsIconArrow;
 
-    
-
     constructor(yubtub, data) {
         this.yubtub = yubtub;
         this.data = data;
 
-        this.htmlElementDivYubtub = document.createElement("div");
-        this.htmlElementDivYubtub.classList.add("yubtub");
+
 
         this.htmlElementMain = document.createElement("main");
         this.htmlElementMain.classList.add("yubtub__main");
@@ -132,6 +136,9 @@ class Main {
 
         this.htmlElementFigure = document.createElement("figure");
         this.htmlElementFigure.classList.add("yubtub__figure");
+
+        this.htmlElementStarTop = document.createElement("i");
+        this.htmlElementStarTop.classList = "fa-regular fa-star yubtub__icon yubtub__icon--starTop";
 
         this.htmlElementIcon = document.createElement("i");
         this.htmlElementIcon.classList.add("yubtub__icon");
@@ -158,11 +165,12 @@ class Main {
         this.htmlElementsIconArrow = document.createElement("i");
         this.htmlElementsIconArrow.classList = "fa-solid fa-right-long yubtub__icon yubtub__icon--arrow";
 
-        this.yubtub.renderer.render("body", this.htmlElementDivYubtub);
+
         this.yubtub.renderer.render(".yubtub", this.htmlElementMain);
         this.yubtub.renderer.render(".yubtub__main", this.htmlElementSection);
         this.yubtub.renderer.render(".yubtub__section", this.htmlElementFigure);
         this.yubtub.renderer.render(".yubtub__figure", this.htmlElementIcon);
+        this.yubtub.renderer.render(".yubtub__figure", this.htmlElementStarTop);
         this.video = new Video(data);
         this.yubtub.renderer.render(".yubtub__figure", this.video.htmlElement);
         this.yubtub.renderer.render(".yubtub__figure", this.htmlElementDivGroup);
@@ -172,7 +180,6 @@ class Main {
         this.yubtub.renderer.render(".yubtub__group", this.htmlElementDivRight);
         this.yubtub.renderer.render(".yubtub__group--right", this.htmlElementIconStarBottom);
         this.yubtub.renderer.render(".yubtub__group--right", this.htmlElementsIconArrow);
-
         this.comments = new Comments(this, data);
     }
 }
@@ -247,15 +254,18 @@ class Comment {
 
 class Aside {
     yubtub;
+    data;
     nextVideo;
     htmlElement;
 
     constructor(yubtub, data) {
         this.yubtub = yubtub;
+        this.data = data;
+        console.log(this.yubtub)
 
         this.htmlElement = document.createElement("aside");
         this.htmlElement.classList.add("yubtub__aside");
-        this.yubtub.renderer.render("div", this.htmlElement);
+        this.yubtub.renderer.render(".yubtub", this.htmlElement);
         this.nextVideo = new NextVideo(this, data);
     }
 }
