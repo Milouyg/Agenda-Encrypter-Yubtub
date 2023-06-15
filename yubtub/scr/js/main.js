@@ -30,20 +30,24 @@ class App {
 }
 
 class Switcher {
+    allData;
+    dataObject;
     yubtub;
     cleaner;
     app;
 
     constructor(app, data) {
         this.app = app; // Class app
-        this.data = data;
-        this.yubtub = new Yubtub(this.app, data);
+        this.allData = data;
+        this.dataObject = data[0]
+
+        this.yubtub = new Yubtub(this.app, this.allData, this.dataObject);
         this.cleaner = new Cleaner();
     }
 
     switch(link) {
         this.cleaner.clean("body");
-        this.yubtub = new Yubtub(this.app, this.data[link]);
+        this.yubtub = new Yubtub(this.app, link);
     }
 
 }
@@ -68,9 +72,9 @@ class Yubtub {
     renderer;
     app;
 
-    constructor(app, data) {
+    constructor(app, allData, dataObject) {
         this.app = app;
-        
+
         this.renderer = new Renderer();
         this.header = new Header();
         this.renderer.render("body", this.header.htmlElement);
@@ -81,8 +85,8 @@ class Yubtub {
 
         this.renderer.render("body", this.htmlElementDivYubtub);
 
-        this.main = new Main(this, data);
-        this.aside = new Aside(this, data);
+        this.main = new Main(this, dataObject);
+        this.aside = new Aside(this, allData);
     }
 }
 
@@ -104,7 +108,7 @@ class Header {
 
 class Main {
 
-    data;
+    dataObject;
     htmlElementDivYubtub;
     htmlElementMain;
     htmlElementSection;
@@ -121,11 +125,9 @@ class Main {
     htmlElementIconStarBottom;
     htmlElementsIconArrow;
 
-    constructor(yubtub, data) {
+    constructor(yubtub, dataObject) {
         this.yubtub = yubtub;
-        this.data = data;
-
-
+        this.dataObject = dataObject;
 
         this.htmlElementMain = document.createElement("main");
         this.htmlElementMain.classList.add("yubtub__main");
@@ -170,7 +172,7 @@ class Main {
         this.yubtub.renderer.render(".yubtub__section", this.htmlElementFigure);
         this.yubtub.renderer.render(".yubtub__figure", this.htmlElementIcon);
         this.yubtub.renderer.render(".yubtub__figure", this.htmlElementStarTop);
-        this.video = new Video(data);
+        this.video = new Video(dataObject);
         this.yubtub.renderer.render(".yubtub__figure", this.video.htmlElement);
         this.yubtub.renderer.render(".yubtub__figure", this.htmlElementDivGroup);
         this.yubtub.renderer.render(".yubtub__group", this.htmlElementDivLeft);
@@ -179,26 +181,25 @@ class Main {
         this.yubtub.renderer.render(".yubtub__group", this.htmlElementDivRight);
         this.yubtub.renderer.render(".yubtub__group--right", this.htmlElementIconStarBottom);
         this.yubtub.renderer.render(".yubtub__group--right", this.htmlElementsIconArrow);
-        this.comments = new Comments(this, data);
+        this.comments = new Comments(this);
     }
 }
 
 class Video {
-    data;
+    dataObject;
     htmlElement;
 
-    constructor(data) {
-        this.data = data;
+    constructor(dataObject) {
+        this.dataObject = dataObject;
         this.htmlElement = document.createElement("video");
         this.htmlElement.classList.add("yubtub__video");
-        this.htmlElement.src = "./scr/videos/" + data[0]["video"];
+        this.htmlElement.src = "./scr/videos/" + dataObject["video"];
 
     }
 }
 
 class Comments {
     main;
-    data;
     comment;
 
     htmlElementUl;
@@ -206,9 +207,8 @@ class Comments {
     htmlElementIconCircleUl;
     htmlElementText;
 
-    constructor(main, data) {
+    constructor(main) {
         this.main = main;
-        this.data = data;
 
         this.htmlElementUl = document.createElement("ul");
         this.htmlElementUl.classList.add("yubtub__comments");
@@ -253,41 +253,49 @@ class Comment {
 
 class Aside {
     yubtub;
-    data;
+    allData;
     nextVideo;
     htmlElement;
 
-    constructor(yubtub, data) {
+    constructor(yubtub, allData) {
         this.yubtub = yubtub;
-        this.data = data;
+        this.allData = allData;
 
         this.htmlElement = document.createElement("aside");
         this.htmlElement.classList.add("yubtub__aside");
         this.yubtub.renderer.render(".yubtub", this.htmlElement);
-        this.nextVideo = new NextVideo(this, data);
+        this.nextVideo = new NextVideo(this, allData);
     }
 }
 
 class NextVideo {
-    data;
+    allData;
     aside;
     htmlElement;
 
-    constructor(aside, data) {
+    constructor(aside, allData) {
         this.aside = aside;
-        this.data = data;
-
-        for(let i = 0; i < 5; i++){
-            this.htmlElement = document.createElement("video");
-            this.htmlElement.classList.add("yubtub__nextVideo");
-            this.htmlElement.src = "./scr/videos/" + data[i].video;
-            this.aside.yubtub.renderer.render("aside", this.htmlElement);
-        }
-        this.htmlElement.onclick = this.videoClicked;
+        this.allData = allData;
+        this.generateVideos(allData, 5);
+        
     }
 
-    videoClicked = () => {
-        this.aside.yubtub.app.switcher.switch(this.data["link"]);
+    generateVideos(allData, amount){
+        for(let i = 0; i < amount; i++){
+            this.htmlElement = document.createElement("video");
+            this.htmlElement.classList.add("yubtub__nextVideo");
+            this.htmlElement.src = "./scr/videos/" + allData[i]["video"];
+            this.aside.yubtub.renderer.render("aside", this.htmlElement);
+
+            this.htmlElement.addEventListener("click", () =>{
+                this.videoClicked(i);
+            });
+        }
+    }
+
+    videoClicked = (i) => {
+        this.aside.yubtub.app.switcher.switch(i);
+        
     }
 }
 
