@@ -39,15 +39,15 @@ class Switcher {
     constructor(app, data) {
         this.app = app; // Class app
         this.allData = data;
-        this.dataObject = data[0]
+        this.dataObject = data[0];
 
         this.yubtub = new Yubtub(this.app, this.allData, this.dataObject);
         this.cleaner = new Cleaner();
     }
 
-    switch(link) {
+    switch(newDataObject) {
         this.cleaner.clean("body");
-        this.yubtub = new Yubtub(this.app, link);
+        this.yubtub = new Yubtub(this.app, this.allData, newDataObject);
     }
 
 }
@@ -276,26 +276,23 @@ class NextVideo {
     constructor(aside, allData) {
         this.aside = aside;
         this.allData = allData;
-        this.generateVideos(allData, 5);
-        
+        this.generateVideos(allData);
     }
 
-    generateVideos(allData, amount){
-        for(let i = 0; i < amount; i++){
+    generateVideos(allData){
+        for(let i = 0; i < allData.length; i++){
             this.htmlElement = document.createElement("video");
             this.htmlElement.classList.add("yubtub__nextVideo");
             this.htmlElement.src = "./scr/videos/" + allData[i]["video"];
             this.aside.yubtub.renderer.render("aside", this.htmlElement);
-
             this.htmlElement.addEventListener("click", () =>{
-                this.videoClicked(i);
+                this.videoClicked(allData[i]);
             });
         }
     }
 
-    videoClicked = (i) => {
-        this.aside.yubtub.app.switcher.switch(i);
-        
+    videoClicked = (newDataObject) => {
+        this.aside.yubtub.app.switcher.switch(newDataObject);
     }
 }
 
