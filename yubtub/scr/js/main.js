@@ -102,8 +102,6 @@ class Header {
         this.text.classList.add("header__p");
         this.text.innerText = "Milou";
     }
-
-
 }
 
 class Main {
@@ -213,28 +211,24 @@ class Comments {
         this.htmlElementUl = document.createElement("ul");
         this.htmlElementUl.classList.add("yubtub__comments");
         this.main.yubtub.renderer.render(".yubtub__main", this.htmlElementUl);
-        this.generateComments(3);
         this.comment = new Comment(this);
-        
     }
 
-    generateComments(amount){
-        for(let i = 0; i < amount; i++){
+    generateComment(timeStamp, value){
             this.htmlElementLi = document.createElement("li");
             this.htmlElementLi.classList.add("yubtub__comment");
-            this.htmlElementLi.setAttribute("id", i);
+            this.htmlElementLi.setAttribute("id", "ts" + timeStamp) // ts stands for timeStamp
 
             this.htmlElementIconCircleUl = document.createElement("i");
             this.htmlElementIconCircleUl.classList = "fa-regular fa-circle yubtub__icon yubtub__icon--circle";
     
             this.htmlElementText = document.createElement("p");
             this.htmlElementText.classList.add("yubtub__text");
-            this.htmlElementText.innerText = "Lorem ipsum..";
+            this.htmlElementText.innerText = value;
     
             this.main.yubtub.renderer.render(".yubtub__comments", this.htmlElementLi);
-            this.main.yubtub.renderer.render("#\\3" + i, this.htmlElementIconCircleUl);
-            this.main.yubtub.renderer.render("#\\3" + i, this.htmlElementText);
-        }
+            this.main.yubtub.renderer.render("#ts" + timeStamp, this.htmlElementIconCircleUl);
+            this.main.yubtub.renderer.render("#ts" + timeStamp, this.htmlElementText);
     }
 }
 
@@ -247,8 +241,19 @@ class Comment {
         this.comment = document.createElement("textarea");
         this.comment.classList.add("yubtub__textarea");
         this.comment.setAttribute("placeholder", "Jouw comment");
+        this.comment.addEventListener("keyup", (e) => {
+            console.log(e)
+            if(e.code === "Enter"){
+                this.pushComment(e["timeStamp"], e["target"]["value"]);
+                this.comment.value = "";
+            }
+        })
         this.comments.main.yubtub.renderer.render(".yubtub__main", this.comment)
         }
+
+    pushComment(timeStamp, value){
+        this.comments.generateComment(timeStamp, value);
+    }
 }
 
 class Aside {
