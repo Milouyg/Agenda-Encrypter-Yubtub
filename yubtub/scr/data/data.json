@@ -4,31 +4,36 @@
             "id": 0,
             "video": "video--1.mp4",
             "title": "test",
-            "link": 1
+            "link": 1,
+            "isFavourite": false
         },
         {
             "id": 1,
             "video": "video--2.mp4",
             "title": "test1",
-            "link": 2
+            "link": 2,
+            "isFavourite": false
         },
         {
             "id": 2,
             "video": "video--3.mp4",
             "title": "test2",
-            "link": 3
+            "link": 3,
+            "isFavourite": false
         },
         {
             "id": 3,
             "video": "video--4.mp4",
             "title": "test3",
-            "link": 4
+            "link": 4,
+            "isFavourite": false
         },
         {
             "id": 4,
             "video": "video--5.mp4",
             "title": "test4",
-            "link": 0
+            "link": 0,
+            "isFavourite": false
         }
     ]
 }

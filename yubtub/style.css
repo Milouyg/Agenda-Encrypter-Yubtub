@@ -78,26 +78,37 @@ body {
   gap: 2rem;
 }
 .yubtub__icon {
-  font-size: 4.5rem;
+  font-size: 4rem;
 }
 .yubtub__icon--starTop {
+  color: transparent;
+  -webkit-text-stroke-width: 0.4rem;
+  -webkit-text-stroke-color: rgb(252, 255, 93);
   position: absolute;
   top: 0.5%;
   left: -2%;
-  font-size: 4.5rem;
-  color: hsl(60deg, 95%, 50%);
 }
 .yubtub__icon--starTop:hover {
   cursor: pointer;
+  color: rgb(252, 255, 93);
 }
 .yubtub__icon--starBottom {
-  color: hsl(60deg, 95%, 50%);
+  color: transparent;
+  -webkit-text-stroke-width: 0.4rem;
+  -webkit-text-stroke-color: rgb(252, 255, 93);
 }
 .yubtub__icon--starBottom:hover {
   cursor: pointer;
+  color: rgb(252, 255, 93);
+}
+.yubtub__icon--arrow {
+  color: transparent;
+  -webkit-text-stroke-width: 0.4rem;
+  -webkit-text-stroke-color: rgb(54, 91, 255);
 }
 .yubtub__icon--arrow:hover {
   cursor: pointer;
+  color: rgb(54, 91, 255);
 }
 .yubtub__comments {
   flex: 1 1 0;

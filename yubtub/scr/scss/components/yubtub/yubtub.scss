@@ -29,8 +29,6 @@
         width: 100%;
     }
 
-    
-
     &__group{
         @include mixins.flexCenter;
         justify-content: space-between;
@@ -53,32 +51,41 @@
     }
 
     &__icon{
-        font-size: 4.5rem;
+        font-size: 4rem;
 
         &--starTop{
+            color: transparent;
+            -webkit-text-stroke-width: .4rem;
+            -webkit-text-stroke-color: rgb(252, 255, 93);
             position: absolute;
             top: .5%;
             left: -2%;
-            font-size: 4.5rem;
-            color: hsl(60, 95%, 50%);
             
-    
             &:hover{
                 cursor: pointer;
+                color: rgb(252, 255, 93);
             }
         }
 
         &--starBottom{
-            color: hsl(60, 95%, 50%);
+            color: transparent;
+            -webkit-text-stroke-width: .4rem;
+            -webkit-text-stroke-color: rgb(252, 255, 93);
 
             &:hover{
                 cursor: pointer;
+                color: rgb(252, 255, 93);
             }
         }
 
         &--arrow{
+            color: transparent;
+            -webkit-text-stroke-width: .4rem;
+            -webkit-text-stroke-color: rgb(54, 91, 255);
+
             &:hover{
                 cursor: pointer;
+                color: rgb(54, 91, 255);
             }
         }
     }

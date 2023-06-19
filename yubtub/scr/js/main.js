@@ -135,7 +135,7 @@ class Main {
         this.htmlElementFigure.classList.add("yubtub__figure");
 
         this.htmlElementStarTop = document.createElement("i");
-        this.htmlElementStarTop.classList = "fa-regular fa-star yubtub__icon yubtub__icon--starTop";
+        this.htmlElementStarTop.classList = "fa-solid fa-star yubtub__icon yubtub__icon--starTop";
 
         this.htmlElementIcon = document.createElement("i");
         this.htmlElementIcon.classList.add("yubtub__icon");
@@ -157,10 +157,25 @@ class Main {
         this.htmlElementDivRight.classList.add("yubtub__group--right");
 
         this.htmlElementIconStarBottom = document.createElement("i");
-        this.htmlElementIconStarBottom.classList = "fa-regular fa-star yubtub__icon yubtub__icon--starBottom";
+        this.htmlElementIconStarBottom.classList = "fa-solid fa-star yubtub__icon yubtub__icon--starBottom";
+        this.htmlElementIconStarBottom.addEventListener("click", ()=>{
+
+            if(dataObject["isFavourite"] === false){
+                this.htmlElementIconStarBottom.style.color = "rgb(252, 255, 93)";
+                this.htmlElementStarTop.style.color = "rgb(252, 255, 93)";
+                dataObject["isFavourite"] = true;
+                alert("This video is added to your favourites :D");
+            }
+            else{
+                dataObject["isFavourite"] = false;
+                this.htmlElementIconStarBottom.style.color = "transparent";
+                this.htmlElementStarTop.style.color = "transparent";
+            }
+        });
 
         this.htmlElementsIconArrow = document.createElement("i");
         this.htmlElementsIconArrow.classList = "fa-solid fa-right-long yubtub__icon yubtub__icon--arrow";
+        
         this.htmlElementsIconArrow.addEventListener("click", () =>{
             this.yubtub.app.switcher.switch(dataObject["link"]);
         })
@@ -199,7 +214,7 @@ class Video {
         this.htmlElement.classList.add("yubtub__video");
         this.htmlElement.src = "./scr/videos/" + dataObject["video"];
         this.htmlElement.muted = true;
-        this.htmlElement.play();
+        // this.htmlElement.play();
     }
 }
 
