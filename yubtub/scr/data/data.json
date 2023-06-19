@@ -3,26 +3,31 @@
         {
             "id": 0,
             "video": "video--1.mp4",
+            "title": "test",
             "link": 1
         },
         {
             "id": 1,
             "video": "video--2.mp4",
+            "title": "test1",
             "link": 2
         },
         {
             "id": 2,
             "video": "video--3.mp4",
+            "title": "test2",
             "link": 3
         },
         {
             "id": 3,
             "video": "video--4.mp4",
+            "title": "test3",
             "link": 4
         },
         {
             "id": 4,
             "video": "video--5.mp4",
+            "title": "test4",
             "link": 0
         }
     ]

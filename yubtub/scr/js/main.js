@@ -31,7 +31,6 @@ class App {
 
 class Switcher {
     allData;
-    dataObject;
     yubtub;
     cleaner;
     app;
@@ -39,15 +38,14 @@ class Switcher {
     constructor(app, data) {
         this.app = app; // Class app
         this.allData = data;
-        this.dataObject = data[0];
 
-        this.yubtub = new Yubtub(this.app, this.allData, this.dataObject);
+        this.yubtub = new Yubtub(this.app, this.allData, this.allData[0]);
         this.cleaner = new Cleaner();
     }
 
-    switch(newDataObject) {
+    switch(newReceivedNumber) {
         this.cleaner.clean("body");
-        this.yubtub = new Yubtub(this.app, this.allData, newDataObject);
+        this.yubtub = new Yubtub(this.app, this.allData, this.allData[newReceivedNumber]);
     }
 
 }
@@ -153,7 +151,7 @@ class Main {
 
         this.htmlElementSpan = document.createElement("span");
         this.htmlElementSpan.classList.add("yubtub__p");
-        this.htmlElementSpan.innerText = "Lorem Ipsum";
+        this.htmlElementSpan.innerText = dataObject["title"];
 
         this.htmlElementDivRight = document.createElement("div");
         this.htmlElementDivRight.classList.add("yubtub__group--right");
@@ -163,7 +161,9 @@ class Main {
 
         this.htmlElementsIconArrow = document.createElement("i");
         this.htmlElementsIconArrow.classList = "fa-solid fa-right-long yubtub__icon yubtub__icon--arrow";
-
+        this.htmlElementsIconArrow.addEventListener("click", () =>{
+            this.yubtub.app.switcher.switch(dataObject["link"]);
+        })
 
         this.yubtub.renderer.render(".yubtub", this.htmlElementMain);
         this.yubtub.renderer.render(".yubtub__main", this.htmlElementSection);
@@ -171,6 +171,11 @@ class Main {
         this.yubtub.renderer.render(".yubtub__figure", this.htmlElementIcon);
         this.yubtub.renderer.render(".yubtub__figure", this.htmlElementStarTop);
         this.video = new Video(dataObject);
+
+        this.video.htmlElement.addEventListener("ended", () => {
+            this.yubtub.app.switcher.switch(dataObject["link"]);
+        });
+
         this.yubtub.renderer.render(".yubtub__figure", this.video.htmlElement);
         this.yubtub.renderer.render(".yubtub__figure", this.htmlElementDivGroup);
         this.yubtub.renderer.render(".yubtub__group", this.htmlElementDivLeft);
@@ -181,6 +186,7 @@ class Main {
         this.yubtub.renderer.render(".yubtub__group--right", this.htmlElementsIconArrow);
         this.comments = new Comments(this);
     }
+    
 }
 
 class Video {
@@ -192,7 +198,8 @@ class Video {
         this.htmlElement = document.createElement("video");
         this.htmlElement.classList.add("yubtub__video");
         this.htmlElement.src = "./scr/videos/" + dataObject["video"];
-
+        this.htmlElement.muted = true;
+        this.htmlElement.play();
     }
 }
 
@@ -221,7 +228,7 @@ class Comments {
 
             this.htmlElementIconCircleUl = document.createElement("i");
             this.htmlElementIconCircleUl.classList = "fa-regular fa-circle yubtub__icon yubtub__icon--circle";
-    
+
             this.htmlElementText = document.createElement("p");
             this.htmlElementText.classList.add("yubtub__text");
             this.htmlElementText.innerText = value;
@@ -242,7 +249,6 @@ class Comment {
         this.comment.classList.add("yubtub__textarea");
         this.comment.setAttribute("placeholder", "Jouw comment");
         this.comment.addEventListener("keyup", (e) => {
-            console.log(e)
             if(e.code === "Enter"){
                 this.pushComment(e["timeStamp"], e["target"]["value"]);
                 this.comment.value = "";
@@ -297,7 +303,7 @@ class NextVideo {
     }
 
     videoClicked = (newDataObject) => {
-        this.aside.yubtub.app.switcher.switch(newDataObject);
+        this.aside.yubtub.app.switcher.switch(newDataObject["id"]);
     }
 }
 
