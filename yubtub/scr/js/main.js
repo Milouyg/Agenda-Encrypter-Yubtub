@@ -146,8 +146,11 @@ class Main {
         this.htmlElementDivLeft = document.createElement("div");
         this.htmlElementDivLeft.classList.add("yubtub__group--left");
 
-        this.htmlElementIconCircle = document.createElement("i");
-        this.htmlElementIconCircle.classList = "fa-regular fa-circle yubtub__icon yubtub__icon--circle";
+        this.htmlElementIconCircle = document.createElement("figure");
+        this.htmlElementIconCircle.classList = "yubtub__icon yubtub__icon--circle";
+
+        this.htmlElementIconUserVideo = document.createElement("i");
+        this.htmlElementIconUserVideo.classList = "fa-solid fa-user yubtub__icon yubtub__icon--userVideo";
 
         this.htmlElementSpan = document.createElement("span");
         this.htmlElementSpan.classList.add("yubtub__p");
@@ -158,15 +161,15 @@ class Main {
 
         this.htmlElementIconStarBottom = document.createElement("i");
         this.htmlElementIconStarBottom.classList = "fa-solid fa-star yubtub__icon yubtub__icon--starBottom";
-        this.htmlElementIconStarBottom.addEventListener("click", ()=>{
+        this.htmlElementIconStarBottom.addEventListener("click", () => {
 
-            if(dataObject["isFavourite"] === false){
+            if (dataObject["isFavourite"] === false) {
                 this.htmlElementIconStarBottom.style.color = "rgb(252, 255, 93)";
                 this.htmlElementStarTop.style.color = "rgb(252, 255, 93)";
                 dataObject["isFavourite"] = true;
                 alert("This video is added to your favourites :D");
             }
-            else{
+            else {
                 dataObject["isFavourite"] = false;
                 this.htmlElementIconStarBottom.style.color = "transparent";
                 this.htmlElementStarTop.style.color = "transparent";
@@ -175,8 +178,8 @@ class Main {
 
         this.htmlElementsIconArrow = document.createElement("i");
         this.htmlElementsIconArrow.classList = "fa-solid fa-right-long yubtub__icon yubtub__icon--arrow";
-        
-        this.htmlElementsIconArrow.addEventListener("click", () =>{
+
+        this.htmlElementsIconArrow.addEventListener("click", () => {
             this.yubtub.app.switcher.switch(dataObject["link"]);
         })
 
@@ -195,13 +198,14 @@ class Main {
         this.yubtub.renderer.render(".yubtub__figure", this.htmlElementDivGroup);
         this.yubtub.renderer.render(".yubtub__group", this.htmlElementDivLeft);
         this.yubtub.renderer.render(".yubtub__group--left", this.htmlElementIconCircle);
+        this.yubtub.renderer.render(".yubtub__icon--circle", this.htmlElementIconUserVideo);
         this.yubtub.renderer.render(".yubtub__group--left", this.htmlElementSpan);
         this.yubtub.renderer.render(".yubtub__group", this.htmlElementDivRight);
         this.yubtub.renderer.render(".yubtub__group--right", this.htmlElementIconStarBottom);
         this.yubtub.renderer.render(".yubtub__group--right", this.htmlElementsIconArrow);
         this.comments = new Comments(this);
     }
-    
+
 }
 
 class Video {
@@ -213,6 +217,7 @@ class Video {
         this.htmlElement = document.createElement("video");
         this.htmlElement.classList.add("yubtub__video");
         this.htmlElement.src = "./scr/videos/" + dataObject["video"];
+        // this.htmlElement.controls = true;
         this.htmlElement.muted = true;
         // this.htmlElement.play();
     }
@@ -236,21 +241,30 @@ class Comments {
         this.comment = new Comment(this);
     }
 
-    generateComment(timeStamp, value){
-            this.htmlElementLi = document.createElement("li");
-            this.htmlElementLi.classList.add("yubtub__comment");
-            this.htmlElementLi.setAttribute("id", "ts" + timeStamp) // ts stands for timeStamp
+    generateComment(timeStamp, value) {
+        this.htmlElementLi = document.createElement("li");
+        this.htmlElementLi.classList.add("yubtub__comment");
+        this.htmlElementLi.setAttribute("id", "ts" + timeStamp); // ts stands for timeStamp
 
-            this.htmlElementIconCircleUl = document.createElement("i");
-            this.htmlElementIconCircleUl.classList = "fa-regular fa-circle yubtub__icon yubtub__icon--circle";
+        let randomNumber = Math.floor(Math.random() * 100000000);
 
-            this.htmlElementText = document.createElement("p");
-            this.htmlElementText.classList.add("yubtub__text");
-            this.htmlElementText.innerText = value;
-    
-            this.main.yubtub.renderer.render(".yubtub__comments", this.htmlElementLi);
-            this.main.yubtub.renderer.render("#ts" + timeStamp, this.htmlElementIconCircleUl);
-            this.main.yubtub.renderer.render("#ts" + timeStamp, this.htmlElementText);
+        this.htmlElementIconCircleUl = document.createElement("figure");
+        this.htmlElementIconCircleUl.classList = "yubtub__icon yubtub__icon--commentCircle";
+        this.htmlElementIconCircleUl.setAttribute("id", "r" + randomNumber);
+        
+
+        this.htmlElementIconUserComment = document.createElement("i");
+        this.htmlElementIconUserComment.classList = "fa-solid fa-user yubtub__icon yubtub__icon--user";
+
+        this.htmlElementText = document.createElement("p");
+        this.htmlElementText.classList.add("yubtub__text");
+        this.htmlElementText.innerText = value;
+        console.log(this.htmlElementIconCircleUl)
+
+        this.main.yubtub.renderer.render(".yubtub__comments", this.htmlElementLi);
+        this.main.yubtub.renderer.render("#ts" + timeStamp, this.htmlElementIconCircleUl);
+        this.main.yubtub.renderer.render("#r" + randomNumber, this.htmlElementIconUserComment);
+        this.main.yubtub.renderer.render("#ts" + timeStamp, this.htmlElementText);
     }
 }
 
@@ -264,15 +278,15 @@ class Comment {
         this.comment.classList.add("yubtub__textarea");
         this.comment.setAttribute("placeholder", "Jouw comment");
         this.comment.addEventListener("keyup", (e) => {
-            if(e.code === "Enter"){
-                this.pushComment(e["timeStamp"], e["target"]["value"]);
+            if (e.code === "Enter") {
+                this.pushComment(Math.round(e["timeStamp"]), e["target"]["value"]);
                 this.comment.value = "";
             }
         })
         this.comments.main.yubtub.renderer.render(".yubtub__main", this.comment)
-        }
+    }
 
-    pushComment(timeStamp, value){
+    pushComment(timeStamp, value) {
         this.comments.generateComment(timeStamp, value);
     }
 }
@@ -305,13 +319,13 @@ class NextVideo {
         this.generateVideos(allData);
     }
 
-    generateVideos(allData){
-        for(let i = 0; i < allData.length; i++){
+    generateVideos(allData) {
+        for (let i = 0; i < allData.length; i++) {
             this.htmlElement = document.createElement("video");
             this.htmlElement.classList.add("yubtub__nextVideo");
             this.htmlElement.src = "./scr/videos/" + allData[i]["video"];
             this.aside.yubtub.renderer.render("aside", this.htmlElement);
-            this.htmlElement.addEventListener("click", () =>{
+            this.htmlElement.addEventListener("click", () => {
                 this.videoClicked(allData[i]);
             });
         }

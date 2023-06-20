@@ -5,6 +5,7 @@
             "video": "video--1.mp4",
             "title": "test",
             "link": 1,
+            "comments": ["Nice video!"],
             "isFavourite": false
         },
         {
@@ -12,6 +13,7 @@
             "video": "video--2.mp4",
             "title": "test1",
             "link": 2,
+            "comments": ["Nice video!"],
             "isFavourite": false
         },
         {
@@ -19,6 +21,7 @@
             "video": "video--3.mp4",
             "title": "test2",
             "link": 3,
+            "comments": ["Nice video!"],
             "isFavourite": false
         },
         {
@@ -26,6 +29,7 @@
             "video": "video--4.mp4",
             "title": "test3",
             "link": 4,
+            "comments": ["Nice video!"],
             "isFavourite": false
         },
         {
@@ -33,6 +37,7 @@
             "video": "video--5.mp4",
             "title": "test4",
             "link": 0,
+            "comments": ["Nice video!"],
             "isFavourite": false
         }
     ]

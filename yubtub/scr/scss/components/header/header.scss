@@ -1,8 +1,9 @@
 @use "../../abstract/mixins";
+@use "../../abstract/vars";
 
 .header{
     width: 100%;
     height: 5rem;
-    background: #5c16c5;
+    background: vars.$mainColor;
     @include mixins.flexCenter;
 }
