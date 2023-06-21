@@ -204,7 +204,7 @@ class Main {
         this.yubtub.renderer.render(".yubtub__group", this.htmlElementDivRight);
         this.yubtub.renderer.render(".yubtub__group--right", this.htmlElementIconStarBottom);
         this.yubtub.renderer.render(".yubtub__group--right", this.htmlElementsIconArrow);
-        this.comments = new Comments(this);
+        this.comments = new Comments(this, dataObject);
     }
 
 }
@@ -226,6 +226,7 @@ class Video {
 
 class Comments {
     main;
+    dataObject;
     comment;
 
     htmlElementUl;
@@ -233,61 +234,67 @@ class Comments {
     htmlElementIconCircleUl;
     htmlElementText;
 
-    constructor(main) {
+    constructor(main, dataObject) {
         this.main = main;
+        this.dataObject = dataObject;
 
         this.htmlElementUl = document.createElement("ul");
         this.htmlElementUl.classList.add("yubtub__comments");
         this.main.yubtub.renderer.render(".yubtub__main", this.htmlElementUl);
-        this.comment = new Comment(this);
+        this.comment = new Comment(this, dataObject);
+        this.generateComment();
     }
 
-    generateComment(timeStamp, value) {
-        this.htmlElementLi = document.createElement("li");
-        this.htmlElementLi.classList.add("yubtub__comment");
-        this.htmlElementLi.setAttribute("id", "ts" + timeStamp); 
+    generateComment() {
+        this.htmlElementUl.innerText = "";
+        for(let i = 0; i < this.dataObject["comments"].length; i++){
 
-        let randomNumber = Math.floor(Math.random() * 100000000);
-
-        this.htmlElementIconCircleUl = document.createElement("figure");
-        this.htmlElementIconCircleUl.classList = "yubtub__icon yubtub__icon--commentCircle";
-        this.htmlElementIconCircleUl.setAttribute("id", "r" + randomNumber);
-        
-        this.htmlElementIconUserComment = document.createElement("i");
-        this.htmlElementIconUserComment.classList = "fa-solid fa-user yubtub__icon yubtub__icon--user";
-
-        this.htmlElementText = document.createElement("p");
-        this.htmlElementText.classList.add("yubtub__text");
-        this.htmlElementText.innerText = value;
-        console.log(this.htmlElementIconCircleUl)
-
-        this.main.yubtub.renderer.render(".yubtub__comments", this.htmlElementLi);
-        this.main.yubtub.renderer.render("#ts" + timeStamp, this.htmlElementIconCircleUl);
-        this.main.yubtub.renderer.render("#r" + randomNumber, this.htmlElementIconUserComment);
-        this.main.yubtub.renderer.render("#ts" + timeStamp, this.htmlElementText);
+            this.htmlElementLi = document.createElement("li");
+            this.htmlElementLi.classList.add("yubtub__comment");
+            this.htmlElementLi.setAttribute("id", "c" + i); 
+    
+            this.htmlElementIconCircleUl = document.createElement("figure");
+            this.htmlElementIconCircleUl.classList = "yubtub__icon yubtub__icon--commentCircle";
+            this.htmlElementIconCircleUl.setAttribute("id", "r" + i);
+            
+            this.htmlElementIconUserComment = document.createElement("i");
+            this.htmlElementIconUserComment.classList = "fa-solid fa-user yubtub__icon yubtub__icon--user";
+    
+            this.htmlElementText = document.createElement("p");
+            this.htmlElementText.classList.add("yubtub__text");
+            this.htmlElementText.innerText = this.dataObject["comments"][i];
+    
+            this.main.yubtub.renderer.render(".yubtub__comments", this.htmlElementLi);
+            this.main.yubtub.renderer.render("#c" + i, this.htmlElementIconCircleUl);
+            this.main.yubtub.renderer.render("#r" + i, this.htmlElementIconUserComment);
+            this.main.yubtub.renderer.render("#c" + i, this.htmlElementText);
+        }
     }
 }
 
 class Comment {
     comments;
+    dataObject;
     comment;
 
-    constructor(comments) {
+    constructor(comments, dataObject) {
         this.comments = comments;
+        this.dataObject = dataObject;
         this.comment = document.createElement("textarea");
         this.comment.classList.add("yubtub__textarea");
         this.comment.setAttribute("placeholder", "Jouw comment");
         this.comment.addEventListener("keyup", (e) => {
             if (e.code === "Enter") {
-                this.pushComment(Math.round(e["timeStamp"]), e["target"]["value"]);
+                this.pushComment(dataObject, e["target"]["value"] );
                 this.comment.value = "";
             }
         })
         this.comments.main.yubtub.renderer.render(".yubtub__main", this.comment);
     }
 
-    pushComment(timeStamp, value) {
-        this.comments.generateComment(timeStamp, value);
+    pushComment(dataObject, text) {
+        dataObject["comments"].push(text);
+        this.comments.generateComment();
     }
 }
 
