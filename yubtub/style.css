@@ -172,9 +172,8 @@ body {
   gap: 1rem;
 }
 .yubtub__nextVideo {
-  width: 25.7rem;
+  width: 25.4rem;
   height: 14.5rem;
-  background: black;
 }
 .yubtub__nextVideo:hover {
   cursor: pointer;
@@ -186,6 +185,11 @@ body {
     flex-direction: column;
   }
   .yubtub__aside {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+  }
+  .yubtub__nextVideo {
     margin: 0 auto;
   }
 }
@@ -195,6 +199,13 @@ body {
   }
   .yubtub__textarea {
     font-size: 1.6rem;
+  }
+}
+@media screen and (max-width: 42.85rem) {
+  .yubtub__nextVideo {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
   }
 }
 @media screen and (max-width: 25rem) {

@@ -12,6 +12,7 @@ class Api {
                 return response.json();
             }).then((data) => {
                 this.data = data["data"];
+                
             })
         return this.data;
     }
@@ -244,7 +245,7 @@ class Comments {
     generateComment(timeStamp, value) {
         this.htmlElementLi = document.createElement("li");
         this.htmlElementLi.classList.add("yubtub__comment");
-        this.htmlElementLi.setAttribute("id", "ts" + timeStamp); // ts stands for timeStamp
+        this.htmlElementLi.setAttribute("id", "ts" + timeStamp); 
 
         let randomNumber = Math.floor(Math.random() * 100000000);
 
@@ -252,7 +253,6 @@ class Comments {
         this.htmlElementIconCircleUl.classList = "yubtub__icon yubtub__icon--commentCircle";
         this.htmlElementIconCircleUl.setAttribute("id", "r" + randomNumber);
         
-
         this.htmlElementIconUserComment = document.createElement("i");
         this.htmlElementIconUserComment.classList = "fa-solid fa-user yubtub__icon yubtub__icon--user";
 
@@ -283,7 +283,7 @@ class Comment {
                 this.comment.value = "";
             }
         })
-        this.comments.main.yubtub.renderer.render(".yubtub__main", this.comment)
+        this.comments.main.yubtub.renderer.render(".yubtub__main", this.comment);
     }
 
     pushComment(timeStamp, value) {

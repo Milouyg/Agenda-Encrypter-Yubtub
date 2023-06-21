@@ -165,13 +165,13 @@
     }
 
     &__nextVideo{
-        width: 25.7rem;
+        width: 25.4rem;
         height: 14.5rem;
-        background: black;
 
         &:hover{
             cursor: pointer;
             border: .3rem solid vars.$mainColor;
+            
         }
     }
 }
