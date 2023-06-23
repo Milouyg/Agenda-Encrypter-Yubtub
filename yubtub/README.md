@@ -10,10 +10,10 @@ in this file.
 In this final assignment we had to make Yubtub, a clone of Youtube but than better ;P.
 The assignment contains 1 main video and 5 (or more) next videos in the aside.
 When the video is ended on the main video, it will automatically go to the next video in the
-aside. You can click on the star to supposedly add it in your favourites.
+aside. You can click on the star to add it in your favourites.
 Also you can click on the arrow to go to the next video or click on a video in the aside
 to go to another video that you like. The last thing you can do is add comments.
 
 ## Desktop and mobile Design
-![Desktop](desktopImg) ![Mobile](mobileImg)
+![Desktop](desktopImg.png) ![Mobile](mobileImg.png)
 
