@@ -204,6 +204,18 @@ body {
     height: 100%;
     margin: 0 auto;
   }
+  .yubtub__icon {
+    font-size: 3.5rem;
+  }
+  .yubtub__icon--user {
+    transform: translateY(10%);
+  }
+  .yubtub__icon--userVideo {
+    transform: translateY(11%);
+  }
+  .yubtub__p {
+    font-size: 1.8rem;
+  }
 }
 @media screen and (max-width: 25rem) {
   .yubtub__group {

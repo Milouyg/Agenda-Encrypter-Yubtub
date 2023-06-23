@@ -37,6 +37,22 @@
             height: 100%;
             margin: 0 auto;
         }
+
+        &__icon{
+            font-size: 3.5rem;
+
+            &--user{
+                transform: translateY(10%);
+            }
+
+            &--userVideo{
+                transform: translateY(11%);
+            }
+        }
+
+        &__p{
+            font-size: 1.8rem;
+        }
     }
     
 }
