@@ -16,10 +16,6 @@
         gap: 3rem;
     }
 
-    &__section{
-        flex: 1 1 0;
-    }
-
     &__figure{
         @include mixins.flexCenter;
         position: relative;
@@ -82,11 +78,11 @@
         &--arrow{
             color: transparent;
             -webkit-text-stroke-width: .4rem;
-            -webkit-text-stroke-color: rgb(54, 91, 255);
+            -webkit-text-stroke-color: vars.$mainColor;
 
             &:hover{
                 cursor: pointer;
-                color: rgb(54, 91, 255);
+                color: vars.$mainColor;
             }
         }
 

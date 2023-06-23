@@ -220,7 +220,7 @@ class Video {
         this.htmlElement.src = "./scr/videos/" + dataObject["video"];
         // this.htmlElement.controls = true;
         this.htmlElement.muted = true;
-        // this.htmlElement.play();
+        this.htmlElement.play();
     }
 }
 

@@ -1,4 +1,0 @@
-
-
-const agendaApp = new AgendaApp();
-

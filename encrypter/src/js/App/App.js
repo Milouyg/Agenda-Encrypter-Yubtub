@@ -14,7 +14,7 @@ class App{
         this.renderer = new Renderer();
         this.api = new Api();
 
-        this.api.getData("/src/data/data.json").then((data) => { // Hier geven we data aan de main mee
+        this.api.getData("./src/data/data.json").then((data) => { // Hier geven we data aan de main mee
             this.main = new Main(data, this);
         });
 
