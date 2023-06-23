@@ -15,5 +15,5 @@ Also you can click on the arrow to go to the next video or click on a video in t
 to go to another video that you like. The last thing you can do is add comments.
 
 ## Desktop and mobile Design
-![Desktop](desktopImg.png) ![Mobile](mobileImg.png)
+![Desktop](./scr/desktopImg.png) ![Mobile](./scr/mobileImg.png)
 
